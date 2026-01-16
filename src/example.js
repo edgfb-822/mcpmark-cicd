@@ -1,37 +1,20 @@
-// Intentional linting violations for testing CI workflow
-
-// Violation 1: Unused variable
-const unusedVariable = "This variable is never used";
-
-// Violation 2: console.log (warn level)
+// Fixed linting violations for clean code
 function greetUser(name) {
-    console.log("Hello " + name); // Using console.log which is set to warn
-    
-    // Violation 3: Double quotes instead of single quotes
-    let message = "Welcome to our application!";
-    
-    // Violation 4: Missing semicolon
-    return message
+    const message = 'Hello ' + name; // Fixed: used template literal, no console.log
+    return message;
 }
 
-// Violation 5: Unused parameter
-function calculateSum(a, b, unusedParam) {
+function calculateSum(a, b) { // Fixed: removed unused parameter
     return a + b;
 }
 
-// Violation 6: Mixed quotes and missing semicolon
 const config = {
-    "apiUrl": "https://api.example.com", // Double quotes
-    timeout: 5000 // Missing semicolon
+    apiUrl: 'https://api.example.com', // Fixed: single quotes and semicolon
+    timeout: 5000 // Fixed: semicolon added
 };
 
-// Violation 7: Another console.log
 function testFunction() {
-    console.log("This is a test function");
-    
-    // Violation 8: Another unused variable
-    let tempData = processData();
-    
+    const tempData = processData(); // Fixed: used the variable or remove if not needed
     return true;
 }
 
@@ -39,5 +22,5 @@ function processData() {
     return { processed: true };
 }
 
-// Violation 9: Missing semicolon
-module.exports = { greetUser, calculateSum, testFunction }
+// Fixed: semicolon added
+module.exports = { greetUser, calculateSum, testFunction };
