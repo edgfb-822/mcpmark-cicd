@@ -1,0 +1,38 @@
+name: Code Linting
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Install ESLint globally
+      run: npm install -g eslint
+      
+    - name: Run ESLint
+      run: eslint src/**/*.js
+      
+    - name: Check for linting errors
+      run: |
+        if eslint src/**/*.js --format=json | jq '.[] | select(.messages | length > 0)' > /dev/null; then
+          echo "Linting errors found!"
+          exit 1
+        else
+          echo "No linting errors found."
+        fi
